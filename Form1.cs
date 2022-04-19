@@ -483,6 +483,10 @@ namespace FinalProject_CalculatorDesktopApp
                 {
                     txtDisplay.Text += btnNumNine.Text;
                     return true;
+                }else if(keyData == Keys.Decimal || keyData == Keys.OemPeriod)
+                {
+                    txtDisplay.Text += btnDecimal.Text;
+                    return true;
                 }
             }else if(keyData == Keys.Add || keyData == (Keys.Shift | Keys.Oemplus) || keyData == Keys.Subtract || keyData == Keys.OemMinus 
                 || keyData == Keys.Multiply || keyData == (Keys.Shift | Keys.D8)  || keyData == Keys.Divide || keyData == Keys.OemQuestion
