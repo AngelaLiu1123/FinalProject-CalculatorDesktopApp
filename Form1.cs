@@ -248,12 +248,15 @@ namespace FinalProject_CalculatorDesktopApp
         private void btnDEC_Click(object sender, EventArgs e)
         {
             string inputStr = txtDisplay.Text;
-            string pattern = @"^[0-1]*$";
-            if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, pattern))
+            if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, binPattern))
             {
-                int inputNum = int.Parse(txtDisplay.Text);
-                int decStr = ConvertBinToDec(inputNum, false);
-                txtDisplay.Text = decStr.ToString();
+                int inputNum = int.Parse(inputStr);
+                int decNum = ConvertBinToDec(inputNum, false);
+                txtDisplay.Text = decNum.ToString();
+            }else if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, locPattern))
+            {
+                string decStr = ConvertLocToDec(inputStr);
+                txtDisplay.Text = decStr;
             }
             else
             {
@@ -265,11 +268,14 @@ namespace FinalProject_CalculatorDesktopApp
         private void btnBIN_Click(object sender, EventArgs e)
         {
             string inputStr = txtDisplay.Text;
-            string pattern = @"^[0-9]*$";
-            if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, pattern))
+            if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, decPattern))
             {
-                int inputNum = int.Parse(txtDisplay.Text);
+                int inputNum = int.Parse(inputStr);
                 string binStr = ConvertDecToBin(inputNum, false);
+                txtDisplay.Text = binStr;
+            }else if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, locPattern))
+            {
+                string binStr = ConvertLocToBin(inputStr);
                 txtDisplay.Text = binStr;
             }
             else
@@ -282,8 +288,12 @@ namespace FinalProject_CalculatorDesktopApp
         private void btnLOC_Click(object sender, EventArgs e)
         {
             string inputStr = txtDisplay.Text;
-            string pattern = @"^[0-9]*$";
-            if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, pattern))
+            if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, binPattern))
+            {
+                string locStr = ConvertBinToLoc(inputStr);
+                txtDisplay.Text = locStr;
+            }
+            else  if (System.Text.RegularExpressions.Regex.IsMatch(inputStr, decPattern))
             {
                 int inputNum = int.Parse(txtDisplay.Text);
                 string locStr = ConvertDecToLoc(inputNum);
