@@ -9,9 +9,10 @@ namespace FinalProject_CalculatorDesktopApp
         string display = string.Empty;
         bool previousKeyIsOpertation = false;
         bool previousKeyIsBinOrDec = false;
-        string binPattern = @"^[0-1]*$";
-        string decPattern = @"^[0-9]*$";
-        string locPattern = @"^[a-z]+$";
+        string binPattern = @"^[0-1]*$";//Binary
+        string decPattern = @"^[0-9]*$";//Decimal
+        string locPattern = @"^[a-z]+$";//Locational
+        string numPattern = @"(^[0-9]*[1-9][0-9]*$)|(^([0-9]{1,}[.][0-9]*)$)"; //Number
         Dictionary<int, string> decLocDict = new Dictionary<int, string>()
             {
                 { 0 , "a"},
@@ -164,31 +165,35 @@ namespace FinalProject_CalculatorDesktopApp
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
-            float displayNum = float.Parse(txtDisplay.Text);
-            float storedOperandNum = float.Parse(storedOperand);
-            float result = 0;
-            switch (storedOperation)
+            if(txtDisplay.Text != string.Empty)
             {
-                case "+":
-                    result = storedOperandNum + displayNum;
-                    txtDisplay.Text = result.ToString();
-                    break;
-                case "-":
-                    result = storedOperandNum - displayNum;
-                    txtDisplay.Text = result.ToString();
-                    break;
-                case "*":
-                    result = storedOperandNum * displayNum;
-                    txtDisplay.Text = result.ToString();
-                    break;
-                case "/":
-                    result = storedOperandNum / displayNum;
-                    txtDisplay.Text = result.ToString();
-                    break;
-            }
+                float displayNum = float.Parse(txtDisplay.Text);
+                float storedOperandNum = float.Parse(storedOperand);
+                float result = 0;
+                switch (storedOperation)
+                {
+                    case "+":
+                        result = storedOperandNum + displayNum;
+                        txtDisplay.Text = result.ToString();
+                        break;
+                    case "-":
+                        result = storedOperandNum - displayNum;
+                        txtDisplay.Text = result.ToString();
+                        break;
+                    case "*":
+                        result = storedOperandNum * displayNum;
+                        txtDisplay.Text = result.ToString();
+                        break;
+                    case "/":
+                        result = storedOperandNum / displayNum;
+                        txtDisplay.Text = result.ToString();
+                        break;
+                }
 
-            storedOperand = result.ToString(); 
-            storedOperation = string.Empty;
+                storedOperand = result.ToString();
+                storedOperation = string.Empty;
+            }
+            
             
             
         }
